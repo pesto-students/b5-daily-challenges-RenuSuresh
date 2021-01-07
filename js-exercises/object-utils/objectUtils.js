@@ -70,9 +70,5 @@ function merge(obj1, obj2) {
   }
   return result;
 }
-let obj = {
-  a: 1,
-  b: 2,
-};
-// console.log(map(obj, ([key, value]) => [key.toUpperCase()]));
+
 export { map, filter, invert, merge, all, some };
