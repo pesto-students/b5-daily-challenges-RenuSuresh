@@ -3,8 +3,8 @@ function map(obj, callback) {
   const result = {};
   if (typeof obj == "object" && obj.constructor == Object) {
     for (const [key, value] of Object.entries(obj)) {
-      let modifiedElement = callback(key, value, obj);
-      result[key] = modifiedElement;
+      let [modifiedKey, modifiedValue] = callback([key, value], obj);
+      result[modifiedKey] = modifiedValue;
     }
     return result;
   } else {
@@ -16,7 +16,7 @@ function filter(obj, callback) {
   const result = {};
   if (typeof obj === "object" && obj.constructor === Object) {
     for (const [key, value] of Object.entries(obj)) {
-      if (callback(key, value, obj)) {
+      if (callback([key, value], obj)) {
         result[key] = value;
       }
     }
@@ -70,5 +70,9 @@ function merge(obj1, obj2) {
   }
   return result;
 }
-
+let obj = {
+  a: 1,
+  b: 2,
+};
+// console.log(map(obj, ([key, value]) => [key.toUpperCase()]));
 export { map, filter, invert, merge, all, some };

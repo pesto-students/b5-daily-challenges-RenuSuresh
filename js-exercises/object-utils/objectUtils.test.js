@@ -75,13 +75,13 @@ describe("filter object function", () => {
   test("value greater than 2", () => {
     const obj = { a: 1, b: 66, c: 67 };
     const expectation = { b: 66, c: 67 };
-    expect(filter(obj, (key, value) => value > 2)).toEqual(expectation);
+    expect(filter(obj, ([key, value]) => value > 2)).toEqual(expectation);
   });
 
   test("value is number", () => {
     const obj = { a: "someString", b: 66, c: "67" };
     const expectation = { b: 66, c: "67" };
-    expect(filter(obj, (key, value) => !isNaN(value))).toEqual(expectation);
+    expect(filter(obj, ([key, value]) => !isNaN(value))).toEqual(expectation);
   });
 });
 
@@ -89,13 +89,13 @@ describe("filter object function", () => {
   test("value greater than 2", () => {
     const obj = { a: 1, b: 66, c: 67 };
     const expectation = { b: 66, c: 67 };
-    expect(filter(obj, (key, value) => value > 2)).toEqual(expectation);
+    expect(filter(obj, ([key, value]) => value > 2)).toEqual(expectation);
   });
 
   test("value is number", () => {
     const obj = { a: "someString", b: 66, c: "67" };
     const expectation = { b: 66, c: "67" };
-    expect(filter(obj, (key, value) => !isNaN(value))).toEqual(expectation);
+    expect(filter(obj, ([key, value]) => !isNaN(value))).toEqual(expectation);
   });
 
   it("should throw an error", () => {
@@ -111,7 +111,14 @@ describe("map object function", () => {
   it("should double the number", () => {
     const obj = { a: 1, b: 2, c: 3 };
     const expectation = { a: 2, b: 4, c: 6 };
-    expect(map(obj, (key, value) => value * 2)).toEqual(expectation);
+    expect(map(obj, ([key, value]) => [key, value * 2])).toEqual(expectation);
+  });
+  it("should double the number and capitalize key", () => {
+    const obj = { a: 1, b: 2, c: 3 };
+    const expectation = { A: 2, B: 4, C: 6 };
+    expect(map(obj, ([key, value]) => [key.toUpperCase(), value * 2])).toEqual(
+      expectation
+    );
   });
 
   it("should throw an error", () => {
