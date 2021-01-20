@@ -5,7 +5,7 @@ const curry = (fn) => {
     if (fn.length === firstArg.length) {
       return fn.apply(this, firstArg);
     }
-    return function (...nextArg) {
+    return function (nextArg) {
       return curried.apply(this, firstArg.concat(nextArg));
     };
   };
